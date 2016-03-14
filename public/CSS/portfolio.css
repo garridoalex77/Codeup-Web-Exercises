@@ -1,0 +1,21 @@
+.background {
+    background-image: url(/img/cubes.png);
+    background-position: fixed;
+}
+
+.first_section {
+    background-color: #9ac2c9;
+}
+
+.second_section {
+    background-color: #ff6201;
+}
+
+.margin-top {
+    margin-top: 40px;
+}
+
+.navbar {
+    height: 60px;
+    background-color: 
+}

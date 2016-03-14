@@ -1,0 +1,70 @@
+body {
+    text-align: center;
+    background-image: url(/img/confectionary.png);
+    font-family: 'Nunito', sans-serif;
+}
+
+h1, h2 {
+    color: #61E786;
+    text-decoration: underline;
+}
+
+ul {
+    list-style: lower-greek;
+}
+
+ul, ol {
+    list-style-position: inside;
+}
+
+
+th, tr {
+    border-bottom: 3px solid black;
+    font-size: 1.5em;
+    padding: 10px;
+}
+
+#wrapper {
+
+    font-variant: small-caps;
+}
+
+a:link {
+    color: #009fb7
+}
+
+a:visited {
+    color: salmon;
+}
+
+a:hover {
+    color: lime;
+}
+
+a:active {
+    color: red;
+}
+
+.shadow {
+    font-size: 2em;
+    text-shadow: silver 3px 3px;
+}
+
+.shadow:hover {
+    font-weight: bolder;
+}
+
+.low_opacity {
+    opacity: .3;
+}
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+tr:hover:not(#table_head) {
+    background-color: #cd626f;
+}
+

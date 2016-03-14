@@ -1,0 +1,89 @@
+body {
+    background-color: #444b6e;
+    color: white;
+    font-family: 'cinzel';
+    font-size: 1.5em;
+}
+
+.background {
+    overflow: auto;
+    background-image: url(/img/ravenna.png);
+    opacity: .5;
+}
+
+.haiku {
+    text-align: center;
+    opacity: 1;
+    width: 150px;
+    height: 30px;
+    background-color: #d1d1d1;
+    margin-top: 30px; 
+    border-radius: 20px;
+    color: #3b3561;
+}
+
+.text {
+    
+}
+
+#word_1 {
+    margin-left: 50%;
+}
+
+#word_2 {
+    margin-top: 50px;
+    margin-left: 40%;
+}
+
+#word_3 {
+    margin-left: 80%;
+}
+
+#word_4 {
+    margin-left: 60%;
+}
+
+#word_5 {
+    margin-top: 15%;
+    margin-left: 50%;
+    font-weight: bolder;
+    text-shadow: 2px 1px black;
+}
+
+#word_6 {
+    margin-top: 10%;
+}
+
+#word_7 {
+    margin-left: 20%;
+
+}
+
+#word_8 {
+    margin-left: 30%;
+}
+
+#word_9 {
+    margin-left: 40%;
+}
+
+#word_10 {
+    margin-left: 25%;
+}
+
+#word_11 {
+    margin-left: 30%;
+}
+
+#word_12 {
+    margin-left: 40%;
+}
+
+#word_13 {
+    font-family: 'damion';
+    margin-left: 70%;
+    color: #ffd6ba;
+    background-color: #ff5d73;
+    border-radius: 25px;
+    text-transform: uppercase;
+}

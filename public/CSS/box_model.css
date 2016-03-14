@@ -1,0 +1,51 @@
+h1 {
+    margin-bottom: 25px;
+}
+
+div {
+    color: white;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    font-weight: bold;
+    margin: 25px;
+}
+
+#red {
+    background-color: red;
+}
+
+#orange {
+    background-color: orange;
+    margin-left: 30px;
+}
+
+#yellow {
+    background-color: yellow;
+    margin-left: 60px;
+}
+
+#green {
+    background-color: green;
+    margin-left: 90px;
+}
+
+#blue {
+    background-color: blue;
+    margin-left: 120px;
+}
+
+#violet {
+    background-color: violet;
+    margin-left: 150px;
+}
+
+div:hover {
+    width: 500px;
+    text-align: center;
+    font-size: 2em;
+    color: #e8d7f1;
+    text-transform: uppercase;
+}
