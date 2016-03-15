@@ -4,11 +4,13 @@
 }
 
 .first_section {
-    background-color: #9ac2c9;
+    background-color: #57b8ff;
+    padding-bottom: 30px;
+
 }
 
 .second_section {
-    background-color: #ff6201;
+    background-color: #FCA311;
 }
 
 .margin-top {
@@ -17,5 +19,5 @@
 
 .navbar {
     height: 60px;
-    background-color: 
+    margin-bottom: 0px;
 }
