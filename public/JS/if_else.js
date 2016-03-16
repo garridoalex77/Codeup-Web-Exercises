@@ -10,17 +10,17 @@ var favorite = 'green'; // TODO: change this to your favorite color from the lis
 // TODO: When a color is encountered log a message that tells the color, and an object of that color.
 //       Example: Blue is the color of the sky.
 if (color == 'red') {
-    console.log("the roof is red.")
+    console.log("the roof is red.");
 } else if (color == 'orange') {
-    console.log("oranges are mostly orange")
+    console.log("oranges are mostly orange");
 } else if (color == 'yellow') {
-    console.log("flowers can be yellow")
+    console.log("flowers can be yellow");
 } else if (color == 'green') {
-    console.log("the grass is green sometimes")
+    console.log("the grass is green sometimes");
 } else if (color == 'blue') {
-    console.log("the sky is blue")
+    console.log("the sky is blue");
 } else { 
-    console.log("I do not know anything by that color")
+    console.log("I do not know anything by that color");
 }
 
 
