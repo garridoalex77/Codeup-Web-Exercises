@@ -1,23 +1,17 @@
 .background {
     background-image: url(/img/cubes.png);
-    background-position: fixed;
+}
+
+.filter {
+    background-color: rgba(13, 237, 255, .3);
 }
 
 .first_section {
-    background-color: rgba(51,55,69,0.4);
+
     padding-bottom: 30px;
 
 }
 
 .second_section {
     background-color: #FCA311;
-}
-
-.margin-top {
-    margin-top: 40px;
-}
-
-.navbar {
-    height: 60px;
-    margin-bottom: 0px;
 }
