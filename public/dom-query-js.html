@@ -9,9 +9,9 @@
     <ul>
         <li data-dbid="1">Item 1</li>
         <li data-dbid="2">Item 2</li>
-        <li data-dbid="3">Item 3</li>
-        <li data-dbid="4">Item 4</li>
-        <li data-dbid="5">Item 5</li>
+        <li data-dbid="4">Item 3</li>
+        <li data-dbid="5">Item 4</li>
+        <li data-dbid="567">Item 5</li>
     </ul>
     <h2 id="sub-header">Hello Again.</h2>
     <p class="sub-paragraph">
@@ -41,13 +41,14 @@
 
             // TODO: Set text color on every other list item to grey
             // TODO: Set text color of li with dbid = 1 to blue
-            
+
             for (var i = 0; i < listItems.length; i++) {
-                var dbID = listItems[i].getAttribute('data-dbid');
-                if ((dbID % 2) == 0) {
+             
+                if ((i % 2) == 0) {
                     listItems[i].style.color = 'grey';
                 } 
-                if (dbID = 1) {
+                var dbId = listItems[i].getAttribute('data-dbid');
+                if (dbId == 1) {
                     listItems[0].style.color = 'blue';    
                 }
             }
@@ -56,10 +57,13 @@
 
             // TODO: Uncomment the next line and get all elements with class name sub-paragraph
             var subParagraphs = document.getElementsByClassName('sub-paragraph');
-
+            for (var i = 0; i < subParagraphs.length; i++) {
+                if (i == 0) {
+                    subParagraphs[i].innerHTML = "Mission Accomplished!";
+                }
             // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
             
-              subParagraphs[0].innerHTML = "Mission Accomplished!";
+          }
         })();
     </script>
 </body>
