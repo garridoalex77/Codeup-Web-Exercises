@@ -22,6 +22,7 @@ input {
     width: 120px;
     height: 30px;
     font-size: 1.5em;
+    overflow: auto;
 }
 
 #second_value {
@@ -63,15 +64,23 @@ button {
 #solve {
     float: left;
 }
+
+
 #btnSol {
+    clear: left;
     height: 105px;
 }
 
 #btnPer {
     clear: left;
-    height: 105px;
+    height: 50px;
 }
 
+#btnAc {
+    clear: left;
+    height: 50px;
+
+}
 
 .container {
     margin-left: 40%;

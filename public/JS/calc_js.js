@@ -22,13 +22,19 @@ var btnMulti = document.getElementById('btnMulti');
 var btnSol = document.getElementById('btnSol');
 var btnDec = document.getElementById('btnDec');
 var btnPer = document.getElementById('btnPer');
+var btnAc = document.getElementById('btnAc');
 
 var btnDecListener = function() {
-    if (!operator.value) {
-        firstValue.value += ".";
-    } else {
-        secondValue.value += ".";
-    }
+    // for (var i = 0; i >= (firstValue.value.length || secondValue.value.length); i++) {
+        if (firstValue.value.indexOf(".") == -1) {
+            firstValue.value += ".";
+            console.log("test");
+        } else if (!operator.value) {
+
+        } else if (secondValue.value.indexOf(".") == -1) {
+            secondValue.value += ".";
+            console.log("test2");
+        }    
 }
 btnDec.addEventListener('click', btnDecListener);
 
@@ -138,6 +144,15 @@ var btnCListener = function() {
     }
 }
 btnC.addEventListener('click', btnCListener);
+//All Clear
+
+var btnAcListener = function() {
+    firstValue.value = "";
+    secondValue.value = "";
+    operator.value = "";
+}
+
+btnAc.addEventListener('click', btnAcListener);
 //Subtraction
 
 var btnMinusListener = function() {
@@ -186,7 +201,7 @@ var btnSolListener = function() {
             firstValue.value = firstValue.value - secondValue.value;
             break;
         case "+":
-            firstValue.value = parseInt(firstValue.value) + parseInt(secondValue.value);
+            firstValue.value = parseFloat(firstValue.value) + parseFloat(secondValue.value);
             break;
         case "/":
             firstValue.value = firstValue.value / secondValue.value;
