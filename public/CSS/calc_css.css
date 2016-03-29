@@ -50,6 +50,31 @@ input {
     font-size: 3em;
 }
 
+.btn-primary {
+    background-color: #545454;
+    border-color: #434343;
+}
+
+.btn-primary:hover {
+    background-color: #303030;
+}
+
+.btn-warning {
+    background-color: #FF921A;
+    border-color: #646464;
+}
+
+.btn-warning:hover {
+    background-color: #F08918;
+}
+
+#btnAc {
+    background-color: #296D87;
+}
+#btnAc:hover {
+    background-color: #1F5266;
+}
+
 button {
     font-family: 'Unica One', cursive;
     margin: 3px;
@@ -68,25 +93,31 @@ button {
     margin: 0px;
 }
 
+
 @media screen and (max-width: 767px) {
-    
+
     #calculator {
         position: absolute;
-        bottom: 0px;
-        left: 0px;
     }
 
     input {
         margin-top: 0px;
+        border-radius: 0px;
+        margin-bottom: 5px;
     }
 
     .btn {
         height: 100px;
         margin: 0px;
+        border-radius: 0px;
     }
 
     #btnSol {
-        height: 120px;
+        position: relative;
+        left: 0;
+        top: 0;
+        font-size: 5em;
+        height: 100%;
     }
 
     #btnAc {
@@ -104,4 +135,19 @@ button {
     body {
         background: #000;
     }
+
+    #first_value {
+        height: 75px;
+    }
+
+    #second_value {
+        height: 75px;
+        
+    }
+
+    #operator {
+        height: 75px;
+
+    }
+
 }

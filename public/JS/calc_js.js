@@ -24,9 +24,9 @@ var btnDec = document.getElementById("btnDec");
 var btnPer = document.getElementById("btnPer");
 var btnAc = document.getElementById("btnAc");
 var btnSqr = document.getElementById("btnSqr");
-var allBtns = document.getElementsByTagName("button");
+var btnNumbers = document.getElementsByClassName("numbers");
 
-//Decimal (switch case?)
+//Decimal 
 var btnDecListener = function() {
     if (firstValue.value.indexOf(".") == -1) {
         firstValue.value += ".";
@@ -38,96 +38,20 @@ var btnDecListener = function() {
 }
 btnDec.addEventListener("click", btnDecListener);
 
-var btn1Listener = function() {
-    if (!operator.value) {
-        firstValue.value += 1;
-    } else {
-        secondValue.value += 1;
-    }
+
+for (var i = 0; i < btnNumbers.length; i++) {
     
-}
-btn1.addEventListener("click", btn1Listener);
-
-var btn2Listener = function() {
+    var btnNumbersListener = function() {
+        var num = this.getAttribute("data-dbid");
         if (!operator.value) {
-        firstValue.value += 2;
-    } else {
-        secondValue.value += 2;
+            firstValue.value += num;
+        } else {
+            secondValue.value += num;
+        }
     }
+btnNumbers[i].addEventListener("click", btnNumbersListener);
 }
-btn2.addEventListener("click", btn2Listener);
 
-var btn3Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 3;
-    } else {
-        secondValue.value += 3;
-    }
-}
-btn3.addEventListener("click", btn3Listener);
-
-var btn4Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 4;
-    } else {
-        secondValue.value += 4;
-    }
-}
-btn4.addEventListener("click", btn4Listener);
-
-var btn5Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 5;
-    } else {
-        secondValue.value += 5;
-    }
-}
-btn5.addEventListener("click", btn5Listener);
-
-var btn6Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 6;
-    } else {
-        secondValue.value += 6;
-    }
-}
-btn6.addEventListener("click", btn6Listener);
-
-var btn7Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 7;
-    } else {
-        secondValue.value += 7;
-    }
-}
-btn7.addEventListener("click", btn7Listener);
-
-var btn8Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 8;
-    } else {
-        secondValue.value += 8;
-    }
-}
-btn8.addEventListener("click", btn8Listener);
-
-var btn9Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 9;
-    } else {
-        secondValue.value += 9;
-    }
-}
-btn9.addEventListener("click", btn9Listener);
-
-var btn0Listener = function() {
-        if (!operator.value) {
-        firstValue.value += 0;
-    } else {
-        secondValue.value += 0;
-    }
-}
-btn0.addEventListener("click", btn0Listener);
 
 //Clear
 var btnCListener = function() {
@@ -218,6 +142,16 @@ var btnSqrlistener = function() {
 
     firstValue.value = Math.sqrt(firstValue.value);
     operator.value = "";
+
+    if (firstValue.value == "NaN") {
+            operator.value = "";
+            secondValue.value = "ERROR";
+            firstValue.value = "ERROR"
+            setTimeout(function() {
+            firstValue.value = "";
+        }, 1000)
+    }
+    secondValue.value = "";
     
 }
 btnSqr.addEventListener("click", btnSqrlistener);
