@@ -4,6 +4,12 @@
     <title></title>
 </head>
 <body>
+<h1 id="heading">I'm here</h1>
+<p class="content">paragraph</p>
+<ul class="content">
+    <li id="list-item" class="content">list stuff</li>
+</ul>
+<div class="content">I'm a div</div>
 
 
 
@@ -11,8 +17,7 @@
 <script>
 $(function() {
     
-alert('the DOM has finished loading');
-
+    alert($('#list-item').html());
 
     
     
