@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		#map-canvas {
+			width: 770px;
+			height: 481px;
+		}
+		.heading {
+			font-size: 3em;
+			font-weight: bolder;
+		}
+		.bodyContent {
+			font-size: 2em;
+		}
+        #pac-input {
+	        background-color: #fff;
+	        font-family: Roboto;
+	        font-size: 15px;
+	        font-weight: 300;
+	        margin-left: 12px;
+	        padding: 0 11px 0 13px;
+	        text-overflow: ellipsis;
+	        width: 300px;
+	    }
+	    .controls {
+	        margin-top: 10px;
+	        border: 1px solid transparent;
+	        border-radius: 2px 0 0 2px;
+	        box-sizing: border-box;
+	        -moz-box-sizing: border-box;
+	        height: 32px;
+	        outline: none;
+	        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	    }
+
+	</style>
+
+</head>
+<body>
+	<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+	<!-- div to hold map -->
+	<div id="map-canvas"></div>
+
+	<!-- Load the Google Maps API [DON'T FORGET TO USE A KEY] -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-_mAWO1NFajlNGKvSU4W8bQTT5ylANVU&libraries=places"></script>
+
+	<!-- Script to show address on map -->
+	<script type="text/javascript">
+	(function() {
+	  "use strict";
+			function initMap() {
+					var customMapType = new google.maps.StyledMapType([
+						{
+							stylers: [
+								{hue:'#C8FFBE'},
+								{visibility: 'simplified'},
+								{gamma: 0.5},
+								{weight: 0.5}
+							]
+						},
+						{
+							elementType: 'labels',
+							stylers: [{visibility: 'off'}]
+						},
+						{
+							featureType: 'water',
+							stylers: [{color: '#114B5F'}]
+						}
+						], {
+							name: 'Custom Style'
+						});
+					var customMapTypeId = 'custom_style';
+					
+
+		var map = new google.maps.Map(document.getElementById("map-canvas"), {
+				zoom: 15, 
+				center: {
+	                lat:  29.426791,
+	                lng: -98.489602
+	            },
+				mapTypeControlOptions: {
+					mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+				}
+		});
+		var input = document.getElementById('pac-input');
+		var searchBox = new google.maps.places.SearchBox(input);
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		map.addListener('bounds_changed', function() {
+			searchBox.setBounds(map.getBounds());
+		});
+		var markers = [];
+		searchBox.addListener('places_changed', function() {
+			var places = searchBox.getPlaces();
+			if (places.length == 0) {
+				return;
+			}
+			markers.forEach(function(marker) {
+				marker.setMap(null);
+			});
+			markers = [];
+			var bounds = new google.maps.LatLngBounds();
+			places.forEach(function(place) {
+				var icon = {
+					url: place.icon,
+					size: new google.maps.Size(71,71),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(17, 34),
+					scaledSize: new google.maps.Size(25, 25)
+				};
+				markers.push(new google.maps.Marker({
+					map: map,
+					animation: google.maps.Animation.DROP,
+					icon: '/IMG/green_icon.png',
+					title: place.name,
+					position: place.geometry.location
+				}));
+				if (place.geometry.viewport) {
+					bounds.union(place.geometry.viewport);
+				} else {
+					bounds.extend(place.geometry.location);
+				}
+			});
+			map.fitBounds(bounds);
+		});
+					map.mapTypes.set(customMapTypeId, customMapType);
+			        map.setMapTypeId(customMapTypeId);
+
+	  	var restaurants = [
+	  		{
+	  			"name": "Brio",
+	  			"address": "15900 La Cantera Pkwy, San Antonio, TX 78256",
+	  			"restInfo": "Used to be great",
+	  			"icon": '/IMG/italian.jpeg'
+	  		},
+	  		{
+	  			"name": "P Terry's",
+	  			"address": "404 S Lamar Blvd, Austin, TX, 78202",
+	  			"restInfo": "This place has good Food",
+  				"icon": '/IMG/burger.png'
+	  		},
+	  		{
+	  			"name": "WildFish",
+	  			"address": "1834 North Loop 1604 W, San Antonio, TX 78248",
+	  			"restInfo": "Fish is good",
+  				"icon": '/IMG/fish.png'
+	  		}
+	  	]
+
+	  	restaurants.forEach(function(restaurant, index) {
+			var address = restaurant.address
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({ "address": address }, function(results, status) {
+		   // Check for a successful result
+			    if (status == google.maps.GeocoderStatus.OK) {
+				   // Recenter the map over the address
+				   map.setCenter(results[0].geometry.location);
+			    } else {
+				   // Show an error message with the status if our request fails
+				   alert("Geocoding was not successful - STATUS: " + status);
+			    }
+				var LatLng = { lat: (results[0].geometry.location.lat()), lng: (results[0].geometry.location.lng()) };
+			  	var marker = new google.maps.Marker({
+				  	position: LatLng,
+				  	draggable: true,
+				  	animation: google.maps.Animation.DROP,
+				  	map: map,
+				  	icon: restaurant.icon
+			  	});
+			  	var infowindow = new google.maps.InfoWindow({
+				  	content: '<div class = "heading">' + restaurant.name + '</div>' + '<div class = "bodyContent">' + restaurant.restInfo + '</div>'
+			  	});
+			  	marker.addListener("click", function() {
+			  		infowindow.open(map, marker);
+			  	});
+		  	});
+		});
+	}
+				initMap();
+	})();
+	</script>
+</body>
+</html>
