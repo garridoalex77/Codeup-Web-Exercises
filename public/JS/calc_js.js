@@ -1,36 +1,32 @@
-(function () {
+$(function() { 
 "use strict";
 
-var firstValue = document.getElementById("first_value");
-var operator = document.getElementById("operator");
-var secondValue = document.getElementById("second_value");
-var btnC = document.getElementById("btnC");
-var btnMinus = document.getElementById("btnMinus");
-var btnAdd = document.getElementById("btnAdd");
-var btnDiv = document.getElementById("btnDiv");
-var btnMulti = document.getElementById("btnMulti");
-var btnSol = document.getElementById("btnSol");
-var btnDec = document.getElementById("btnDec");
-var btnPer = document.getElementById("btnPer");
-var btnAc = document.getElementById("btnAc");
-var btnSqr = document.getElementById("btnSqr");
-var btnNumbers = document.getElementsByClassName("numbers");
+var firstValue = $("#first_value")[0];
+var operator = $("#operator")[0];
+var secondValue = $("#second_value")[0];
+var btnC = $("#btnC")[0];
+var btnMinus = $("#btnMinus")[0];
+var btnAdd = $("#btnAdd")[0];
+var btnDiv = $("#btnDiv")[0];
+var btnMulti = $("#btnMulti")[0];
+var btnSol = $("#btnSol")[0];
+var btnDec = $("#btnDec")[0];
+var btnPer = $("#btnPer")[0];
+var btnAc = $("#btnAc")[0];
+var btnSqr = $("#btnSqr")[0];
+var btnNumbers = $(".numbers");
 
 //Decimal 
 var btnDecListener = function() {
     if (firstValue.value.indexOf(".") == -1) {
         firstValue.value += ".";
     } else if (!operator.value) {
-
     } else if (secondValue.value.indexOf(".") == -1) {
         secondValue.value += ".";
     }    
 }
 btnDec.addEventListener("click", btnDecListener);
-
-
-for (var i = 0; i < btnNumbers.length; i++) {
-    
+//All Numbers
     var btnNumbersListener = function() {
         var num = this.getAttribute("data-dbid");
         if (!operator.value) {
@@ -39,8 +35,9 @@ for (var i = 0; i < btnNumbers.length; i++) {
             secondValue.value += num;
         }
     }
-btnNumbers[i].addEventListener("click", btnNumbersListener);
-}
+    //missing parameters?
+btnNumbers.on("click", btnNumbersListener);
+
 
 
 //Clear
@@ -139,9 +136,9 @@ var btnSqrlistener = function() {
             firstValue.value = "ERROR"
             setTimeout(function() {
             firstValue.value = "";
+            secondValue.value = "";
         }, 1000)
     }
-    secondValue.value = "";
     
 }
 btnSqr.addEventListener("click", btnSqrlistener);
@@ -175,9 +172,9 @@ var btnSolListener = function() {
             firstValue.value = "ERROR"
             setTimeout(function() {
             firstValue.value = "";
+            secondValue.value = "";
         }, 1000)
     }
-    secondValue.value = "";
 
     if (firstValue.value == 3.14) {
         document.getElementById("header").innerHTML = "PI";
@@ -188,5 +185,4 @@ var btnSolListener = function() {
 }   
 btnSol.addEventListener("click", btnSolListener);
 
-})();
-
+});
