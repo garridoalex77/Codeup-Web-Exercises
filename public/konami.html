@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1 id = "display">Konami Code</h1>
+    <img class = "random" src = "">
+
+    <script src="/js/jquery.js"></script>
+    <script>
+        "use strict";
+            var keys = [];
+            var konami = '38,38,40,40,37,39,37,39,66,65';
+        $(document).keyup(function(e){
+            keys.push(e.keyCode);
+            if (konami.indexOf(keys.toString()) <= -1){
+                keys = [];
+                $('#display').html("FAIL")
+            } else if (konami.indexOf(keys.toString()) >= 0) {
+                switch (e.originalEvent.code) {
+                    case 'ArrowUp':
+                    $('#display').html('<i class="fa fa-arrow-up"></i>');
+                    break;
+                    case 'ArrowDown':
+                    $('#display').html('<i class="fa fa-arrow-down"></i>');
+                    break;
+                    case 'ArrowLeft':
+                    $('#display').html('<i class="fa fa-arrow-left"></i>');
+                    break;
+                    case 'ArrowRight':
+                    $('#display').html('<i class="fa fa-arrow-right"></i>');
+                    break;
+                    case 'KeyA':
+                    $('#display').html('A');
+                    break;
+                    case 'KeyB':
+                    $('#display').html('B');
+                    break;
+                }
+                setTimeout(function(){
+                    $('#display').html(""); 
+                }, 200)
+            } 
+            if (keys.toString() == konami) {
+                // $('body').css('background-color', 'orange');
+                $('body').css('background-image', 'url(/IMG/konami_bg.jpg)')
+                $('img').attr('src', '/IMG/dude.jpg')
+                setTimeout(function() {
+                $('body').css('background-image', '')
+                $('img').attr('src','')
+                }, 5000);
+                keys = [];
+            }        
+        });
+    </script>
+</body>
+</html>
