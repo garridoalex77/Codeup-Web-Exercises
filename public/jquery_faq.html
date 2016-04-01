@@ -68,10 +68,10 @@
 $(function() { 
     // $('body').append('<a href="#" id="showDd">toggle</a>')
     
-    $('dd').addClass('invisible');
-    
+    $('dd').hide();
+
     $('#showDd').click(function() {
-        $('dd').toggleClass('invisible');
+        $('dd').toggle();
     });
 
     $('dt').css({
@@ -90,7 +90,7 @@ $(function() {
 
 
     $('li').click(function() {
-            $(this).parent().addClass('invisible');
+            $(this).parent().hide();
 
     })
 
