@@ -35,6 +35,32 @@
         <dd>The largest living things in the world are in National Parks: Sequoia trees and Alaskan brown bears (the world’s largest living carnivores).</dd>
     </dl>
 
+    <h1>Parks List</h1>
+    <h3>National Parks</h3>
+    <ul id="national-parks">
+        <li>Arches</li>
+        <li>Badlands</li>
+        <li>Carlsbad Caverns</li>
+        <li>Denali</li>
+        <li>Everglades</li>
+    </ul>
+    <h3>State Parks of Texas</h3>
+    <ul id="state-parks-texas">
+        <li>Abilene</li>
+        <li>Big Bend</li>
+        <li>Choke Canyon</li>
+        <li>Davis Mountains</li>
+        <li>Enchanted Rock</li>
+    </ul>
+    <h3>State Parks of Texas</h3>
+    <ul id="state-parks-texas">
+        <li>Abilene</li>
+        <li>Big Bend</li>
+        <li>Choke Canyon</li>
+        <li>Davis Mountains</li>
+        <li>Enchanted Rock</li>
+    </ul>
+
 
 
 <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
@@ -43,20 +69,30 @@ $(function() {
     // $('body').append('<a href="#" id="showDd">toggle</a>')
     
     $('dd').addClass('invisible');
+    
     $('#showDd').click(function() {
         $('dd').toggleClass('invisible');
     });
+
     $('dt').css({
         'background-color': 'lawngreen',
         'font-size': '3em'
     });
+
     $('dd').css({
         'background-color': 'skyblue',
         'font-size': '2em'
     });
 
+    $('ul').each(function(){
+        $(this).children().first().css('font-weight', 'bold')
+    })
 
 
+    $('li').click(function() {
+            $(this).parent().addClass('invisible');
+
+    })
 
 
 });
