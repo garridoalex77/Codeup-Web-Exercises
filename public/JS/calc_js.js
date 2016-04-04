@@ -182,6 +182,8 @@ var btnSolListener = function() {
         document.getElementById("header").innerHTML = "Calculator";
         }, 3000)
     }
+
+    secondValue.value = "";
 }   
 btnSol.addEventListener("click", btnSolListener);
 
