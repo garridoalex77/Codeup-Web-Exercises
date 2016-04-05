@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather Map</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/CSS/map_style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row" id="city_name"></div>
+		<div class="row">
+			<div id="data1" class="dayInfo col-xs-4"></div>
+			<div id="data2" class="dayInfo col-xs-4"></div>
+			<div id="data3" class="dayInfo col-xs-4"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1">
+			<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+			<div id="map-canvas"></div>
+		</div>
+	</div>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-_mAWO1NFajlNGKvSU4W8bQTT5ylANVU&libraries=places"></script>
+
+	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+
+	<script>
+	(function() {
+	  "use strict";
+			function initMap() {
+					// var customMapType = new google.maps.StyledMapType([
+					// 	{
+					// 		stylers: [
+					// 			{hue:'#C8FFBE'},
+					// 			{visibility: 'simplified'},
+					// 			{gamma: 0.5},
+					// 			{weight: 0.5}
+					// 		]
+					// 	},
+					// 	{
+					// 		elementType: 'labels',
+					// 		stylers: [{visibility: 'off'}]
+					// 	},
+					// 	{
+					// 		featureType: 'water',
+					// 		stylers: [{color: '#114B5F'}]
+					// 	}
+					// 	], {
+					// 		name: 'Custom Style'
+					// 	});
+					// var customMapTypeId = 'custom_style';
+					
+
+		var map = new google.maps.Map(document.getElementById("map-canvas"), {
+				zoom: 15, 
+				center: {
+	                lat:  29.426791,
+	                lng: -98.489602
+	            },
+				mapTypeControlOptions: {
+					mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+				}
+
+		});
+	  	var marker = new google.maps.Marker({
+			  	position: {
+	                lat:  29.426791,
+	                lng: -98.489602
+	            },
+			  	animation: google.maps.Animation.DROP,
+			  	map: map
+		  	});
+		var input = document.getElementById('pac-input');
+		var searchBox = new google.maps.places.SearchBox(input);
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		map.addListener('bounds_changed', function() {
+			searchBox.setBounds(map.getBounds());
+		});
+		var markers = [];
+		searchBox.addListener('places_changed', function() {
+			var places = searchBox.getPlaces();
+			if (places.length == 0) {
+				return;
+			}
+			markers.forEach(function(marker) {
+				marker.setMap(null);
+			});
+			markers = [];
+			var bounds = new google.maps.LatLngBounds();
+			places.forEach(function(place) {
+				var icon = {
+					url: place.icon,
+					size: new google.maps.Size(71,71),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(17, 34),
+					scaledSize: new google.maps.Size(25, 25)
+				};
+				markers.push(new google.maps.Marker({
+					map: map,
+					animation: google.maps.Animation.DROP,
+					title: place.name,
+					position: place.geometry.location
+				}));
+				if (place.geometry.viewport) {
+					bounds.union(place.geometry.viewport);
+				} else {
+					bounds.extend(place.geometry.location);
+				}
+			});
+			map.fitBounds(bounds);
+		});
+					// map.mapTypes.set(customMapTypeId, customMapType);
+			  //       map.setMapTypeId(customMapTypeId);
+
+		function geocodeAddress(geocoder, resultsMap) {
+			var address = $('address').value;
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({ "address": address }, function(results, status) {
+		   // Check for a successful result
+			    if (status == google.maps.GeocoderStatus.OK) {
+				   // Recenter the map over the address
+				   map.setCenter(results[0].geometry.location);
+			    } else {
+				   alert("Geocoding was not successful - STATUS: " + status);
+			    }
+				var LatLng = { lat: (results.geometry.location.lat()), lng: (results.geometry.location.lng()) };
+			  	var marker = new google.maps.Marker({
+				  	position: LatLng,
+				  	animation: google.maps.Animation.DROP,
+				  	map: map,
+				  	icon: restaurant.icon
+			  	});
+			  	marker.addListener("click", function() {
+			  		infowindow.open(map, marker);
+			  	});
+		  	});
+		}
+	}
+	initMap();
+	$.get("http://api.openweathermap.org/data/2.5/forecast", {
+		APPID: "f86addf6638afb000f6ae4f59b2acdc7",
+		q: "San Antonio, TX",
+		units: "imperial",
+		cnt: 3
+	}).done(function(data) {
+		console.log(data);
+		$('#city_name').append('<h2>' + data.city.name + '</h2>');
+
+		$('.dayInfo').each(function(i) {
+		var maxTemp = Math.round(data.list[i].main.temp_max)
+		var minTemp = Math.round(data.list[i].main.temp_min)
+
+		$(this).append('<p class="temp">' + maxTemp + "&#176 / " + minTemp + "&#176" + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png">' + '<p>' + data.list[i].weather[0].main + ": " + data.list[i].weather[0].description + '</p>' + '<p>' + "Humidity: " + data.list[i].main.humidity + '</p>' + '<p>' + "Wind: " + data.list[0].wind.speed + '</p>' + '<p>' + "Pressure: " + data.list[i].main.pressure + '</p>');
+		});
+	});
+	})();
+	</script>
+</body>
+</html>
