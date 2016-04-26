@@ -1,0 +1,30 @@
+nav {
+    margin-bottom: 5px;
+    background-color: black;
+}
+
+.material-icons, .brand-logo {
+    font-variant: small-caps;
+}
+body {
+    background-color: #00bcd4;
+}
+
+#posts {
+    background-image: url("/IMG/confectionary.png");
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+p {
+    font-size: 1.5em:;
+}
+
+footer {
+    font-variant: small-caps;
+    font-weight: bolder;
+}

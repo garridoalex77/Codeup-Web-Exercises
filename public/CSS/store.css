@@ -1,0 +1,20 @@
+body {
+    background-color: lightgrey
+}
+
+h1 {
+    color: steelblue;
+}
+
+th {
+    color: maroon;
+}
+
+td:hover {
+    background-color: snow;
+    border-radius: 30px;
+}
+
+th, td, tr {
+    text-align: center;
+}
