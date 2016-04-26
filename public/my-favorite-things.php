@@ -1,9 +1,12 @@
 <?php
-$things = ["Basketball", "BBQ", "Movies", "Programming", "Soccer"];
-$i = 0;
+function pageController() {
+    $things = ["Basketball", "BBQ", "Movies", "Programming", "Soccer"];
+    $i = 0;
+    return [ "thing" => $things];
+    
+}
+extract(pageController());
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +24,7 @@ $i = 0;
 <body>
     <h1>My Favorite Things</h1>
     <table>
-        <?php foreach ($things as $value): ?>
+        <?php foreach ($thing as $value): ?>
         <tr>
             <td> <?= $value; ?> </td>
         </tr>
