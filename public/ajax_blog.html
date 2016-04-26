@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax blog</title>
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	 <link rel="stylesheet" href="/CSS/blog.css">
+</head>
+<body>
+	<nav>
+		<div class="nav-wrapper">
+		 	<a href="#!" class="brand-logo">click me</a>
+		 	<ul class="right hide-on-med-and-down">
+				<li><a href="#"><i class="material-icons">stuff</i></a></li>
+				<li><a href="#"><i class="material-icons">more stuff</i></a></li>
+				<li><a href="#"><i class="material-icons">even more stuff</i></a></li>
+		 	</ul>
+		</div>
+	 </nav>
+	<div class = "container" id = "posts"> </div>
+
+<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+<script>
+$(function() { 
+	var postInfo = $.get("DATA/blog.json");
+	postInfo.done(function(data) {
+		data.forEach(function(element) {
+			console.log(element)
+			$("#posts").append(
+				'<h1>' + element.title + '</h1>' + 
+				'<footer>' + element.date + '</footer>' + 
+				'<p>' + element.content + '</p>' + 
+				'<footer>' + "Categories:" + " " + element.categories.join(", ") + '</footer>')
+		});
+	});
+
+
+
+
+
+
+
+
+
+
+});
+</script>
+
+</body>
+</html>

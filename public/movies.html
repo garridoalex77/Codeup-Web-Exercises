@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    
+(function () {
+
+//     var movies = [
+//         ['pulp fiction', 'drama', 'pg-17'],
+//         ['star wars', 'action', 'pg-13'],
+//         ['star trek', 'action', 'pg-13'],
+//         ['hitchhikers guide', 'comedy', 'pg'],
+//         ['hobbit', 'action', 'pg-13'],
+//         ['lord of the rings', 'action', 'pg-13'],
+//         ['happy feet', 'family', 'pg'],
+//         ['knocked up', 'comedy', 'r'],
+//         ['superbad', 'comedy', 'r'],
+//         ['deadpool', 'action', 'r']
+//     ]
+
+// //sort
+// //how to put arrays together
+// for (var i = 0; i < movies.length; i++) {
+//     var list = (movies[i][0]);
+
+//     var arrayM = movies[i][0].split(", ");
+//     console.log(arrayM);
+
+
+// // movie/genre/rating
+// for (var i = 0; i < movies.length; i++) {
+//     if (movies[i][0] != "hitchhikers guide") {
+//     console.log(movies[i][0], movies[i][1], movies[i][2]);
+//     } else {
+//         console.log(movies[i][0], movies[i][1], movies[i][2] + " <-- this is my favorite movie");
+//     }
+// }
+// // log as array test code
+// movies.forEach (function (element, index) {
+
+//     if (element != "hitchhikers guide"){
+//         console.log(element)
+//     } else {
+//         console.log(element + " this is my favorite movie");
+//     }
+// })
+var car = {};
+car.make = "Toyota";
+car.model = "Camry";
+
+// create a logMakeModel method on the car object
+car.logMakeModel = function () {
+    console.log('Car make/model is: ' + this.make + ' ' + this.model);
+};
+
+// log the make/model
+car.logMakeModel();
+
+
+})();
+
+
+</script>
+</body>
+</html>

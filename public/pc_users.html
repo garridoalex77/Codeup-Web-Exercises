@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+(function () {
+'use strict';
+
+var myComputer = {
+    users: ['Alex'],
+    showUsers: function() {
+        console.log(this.users);
+    },
+    addUser: function(user) {
+        this.users.push(user);
+    },
+    removeUser: function(user) {
+        this.users.splice(this.users.indexOf(user), 1);
+    }
+}
+myComputer.addUser('bob');
+myComputer.showUsers();
+myComputer.addUser('bob');
+myComputer.addUser('zach');
+myComputer.showUsers();
+myComputer.removeUser('zach')
+myComputer.removeUser('Alex')
+myComputer.showUsers();
+
+
+
+
+})();
+
+
+
+
+</script>
+
+</body>
+</html>

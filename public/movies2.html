@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+(function () {
+'use strict'
+    var movies = 
+        ['pulp fiction',
+        'star wars',
+        'star trek',
+        'hitchhikers guide',
+        'hobbit',
+        'interstellar',
+        'guardians of the galaxy',
+        'knocked up',
+        'superbad',
+        'deadpool']
+
+        function favoriteMovies (movies) {
+            var sorted = movies.sort();
+            var favRemoved = sorted.splice(sorted.indexOf('hitchhikers guide'), 1);
+            var leastRemoved = sorted.splice(sorted.indexOf('knocked up'), 1);
+            leastRemoved = leastRemoved.join();
+            favRemoved = favRemoved.join();
+            var favFront = sorted.unshift(favRemoved);
+            var leastLast = sorted.push(leastRemoved);
+
+            var favOff = sorted.shift();
+            var leastOff = sorted.pop();
+            console.log("My all time favorite movie is " + favOff);
+            console.log("My least favorite movie is " + leastOff);
+            console.log("Some other movies are " + sorted.join(", "));
+        }
+    favoriteMovies(movies);
+    console.log(movies);
+
+
+})();
+
+
+</script>
+
+</body>
+</html>
