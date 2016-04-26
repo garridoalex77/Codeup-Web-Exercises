@@ -18,7 +18,7 @@ return "{$array1[$firstRand]} {$array2[$secondRand]}\n";
 <head>
 <style>
     body {
-        background-color: <?php echo $colors[$randomColor] ?>;
+        background-color: <?= $colors[$randomColor] ?>;
     }
     h1 {
         margin-top: 150px;
@@ -29,6 +29,6 @@ return "{$array1[$firstRand]} {$array2[$secondRand]}\n";
 </style>
 </head>
 <body>
-<h1><?php echo random($adjectives, $nouns); ?></h1>
+<h1><?= random($adjectives, $nouns); ?></h1>
 
 </body>
