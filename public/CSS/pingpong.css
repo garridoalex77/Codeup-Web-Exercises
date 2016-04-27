@@ -1,0 +1,49 @@
+
+/*@-webkit-keyframes moveIt {
+    0%   {margin-right:0;}
+    50%  {margin-right:100%;}
+    100% {margin-right:0;}
+}
+*/
+.moveIt {
+    font-size: 2.5em;
+}
+
+#upper {
+    text-align: center;
+    width: 200px;
+    height: 80px;
+    position: relative;
+    background-color: black;
+    animation: slide 3s infinite;
+}
+
+#ball {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background-color: black;
+    animation: bounce 3s infinite, slide 3s infinite;
+}
+
+@keyframes bounce {
+    0%   {top:0px;}
+    50%  {top:150px;}
+    100% {top:0px;}    
+}
+
+#lower {
+    margin-top: 150px;
+    text-align: center;
+    width: 200px;
+    height: 80px;
+    position: relative;
+    background-color: black;
+    animation: slide 3s infinite;
+    animation-delay: 300ms;
+}
+@keyframes slide {
+    0%   {left:0px;}
+    50%  {left:75%;}
+    100% {left:0px;}
+}
