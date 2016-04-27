@@ -1,7 +1,6 @@
 <?php
 function pageController() {
     $things = ["Basketball", "BBQ", "Movies", "Programming", "Soccer"];
-    $i = 0;
     return [ "thing" => $things];
     
 }
