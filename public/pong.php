@@ -1,4 +1,5 @@
 <?php
+require 'functions.php';
 function pageController() {
     if (!isset($_GET['count'])) {
         $count = 0;
@@ -9,7 +10,6 @@ function pageController() {
 }
 
 extract(pageController());
-var_dump(extract(pageController()));
 
 ?>
 
@@ -20,7 +20,7 @@ var_dump(extract(pageController()));
     <link rel="stylesheet" href="/CSS/pingpong.css">
 </head>
 <body>
-<h1>PONG <?= $count ?> </h1>
+<h1>PONG <?= escape($count) ?> </h1>
 <div id="upper">
     <a href="ping.php?count=0" class="moveIt">MISS</a>
 </div>
@@ -28,7 +28,7 @@ var_dump(extract(pageController()));
 <div id="ball"></div>
 
 <div id="lower">
-    <a href="ping.php?count=<?= $count + 1 ?>" class="moveIt">HIT</a>
+    <a href="ping.php?count=<?= escape($count) + 1 ?>" class="moveIt">HIT</a>
 </div>
 
 </body>

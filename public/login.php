@@ -1,11 +1,17 @@
 <?php 
 function pageController() {
-    if (empty($_POST)) {
+    require 'functions.php';
+    session_start();
+    if (inputHas("logged_in_usr")) {
+        redirect("Location: authorized.php");
+    }
+    if (empty($_REQUEST)) {
         $status = "Login";
     } else {
-        if ($_POST["name"] == "guest" && $_POST["password"] == "password") {
-            header("Location: authorized.php");
-            die();
+        if (inputGet("name") == "guest" && inputGet("password") == "password") {
+            $_SESSION["logged_in_usr"] = inputGet("name");
+            $status = "Login";
+            redirect("Location: authorized.php");
         } else {
             $status = "Login FAIL";
         }
