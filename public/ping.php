@@ -1,10 +1,11 @@
 <?php
+require_once '../input.php';
 require 'functions.php';
 function pageController() {
-    if (!isset($_GET['count'])) {
+    if (!Input::has('count')) {
         $count = 0;
     } else {
-        $count = $_GET['count'];
+        $count = Input::get('count');
     }
     return ['count' => $count];
 }
