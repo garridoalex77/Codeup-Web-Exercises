@@ -2,14 +2,14 @@
 function pageController() {
     require '../Auth.php';
     session_start();
-    if (Input::has("logged_in_usr")) {
+    if (Auth::check()) {
         Input::redirect("Location: authorized.php");
     }
     if (empty($_REQUEST)) {
         $status = "Login";
     } else {
         Auth::attempt(Input::get("name"), Input::get("password"));
-        if (Input::get("name") == "guest" && Input::get("password") == "password") {
+        if (Auth::check()) {
             $status = "Login";
             Input::redirect("Location: authorized.php");
         } else {

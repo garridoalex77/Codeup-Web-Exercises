@@ -1,6 +1,7 @@
 <?php 
 function pageController() {
     require '../Auth.php';
+    session_start();
     Auth::logout();
 }
 

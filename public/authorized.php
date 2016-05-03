@@ -2,10 +2,10 @@
 function pageController() {
     require '../Auth.php';
     session_start();
-    if (Input::has("logged_in_usr")) {
+    if (!Auth::check()) {
         Input::redirect("Location: login.php");
     } else {
-        $hello = "Hello" . " " . $_SESSION["logged_in_usr"];
+        $hello = "Hello" . " " . Auth::user();
     }
     return ["hello" => $hello];
 }

@@ -1,5 +1,5 @@
 <?php
-require_once "Log.php";
+require_once 'Log.php';
 require_once 'Input.php';
 
 class Auth 
@@ -20,7 +20,7 @@ class Auth
      }
      public static function check() 
      {
-        if ($_SESSION["logged_in_usr"]) {
+        if (isset($_SESSION["logged_in_usr"])) {
             return true;
         } else {
             return false;
@@ -32,7 +32,6 @@ class Auth
      }
      public static function logout() 
      {
-        session_start();
         session_unset();
         session_regenerate_id(true);
         header("Location: login.php");
