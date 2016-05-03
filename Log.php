@@ -15,6 +15,7 @@ class Log
 
     public function logMessage($logLevel, $message) 
     {
+        $date = date('Y-m-d');
         $time = date('h:i:s');
         fwrite($this->handle, "{$date} {$time} {$logLevel} {$message}\n");
     }

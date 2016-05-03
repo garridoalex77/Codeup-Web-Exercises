@@ -8,7 +8,7 @@ class Auth
 
      public static function attempt($username, $password) 
      {
-        if ($username == "guest" && password_verify("password", self::password)) {
+        if ($username == "guest" && password_verify($password, self::$password)) {
             $_SESSION["logged_in_usr"] = Input::get("name");
             $userLogin = new Log("users.txt");
             $userLogin->logInfo("user {$username} logged in"); 

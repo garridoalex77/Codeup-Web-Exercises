@@ -8,8 +8,8 @@ function pageController() {
     if (empty($_REQUEST)) {
         $status = "Login";
     } else {
+        Auth::attempt(Input::get("name"), Input::get("password"));
         if (Input::get("name") == "guest" && Input::get("password") == "password") {
-            $_SESSION["logged_in_usr"] = Input::get("name");
             $status = "Login";
             Input::redirect("Location: authorized.php");
         } else {
