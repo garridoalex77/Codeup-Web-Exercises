@@ -1,9 +1,9 @@
 <?php
 function pageController() {
-    require 'functions.php';
+    require '../Auth.php';
     session_start();
-    if (inputHas("logged_in_usr")) {
-        redirect("Location: login.php");
+    if (Input::has("logged_in_usr")) {
+        Input::redirect("Location: login.php");
     } else {
         $hello = "Hello" . " " . $_SESSION["logged_in_usr"];
     }

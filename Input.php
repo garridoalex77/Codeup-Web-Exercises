@@ -8,6 +8,11 @@ class Input
      * @param string $key index to look for in request
      * @return boolean whether value exists in $_POST or $_GET
      */
+    public static function redirect($input) {
+        return header($input);
+        die();
+    }
+
     public static function has($key)
     {
         return isset($_REQUEST[$key]);

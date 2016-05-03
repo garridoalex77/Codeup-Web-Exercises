@@ -1,17 +1,17 @@
 <?php 
 function pageController() {
-    require 'functions.php';
+    require '../Auth.php';
     session_start();
-    if (inputHas("logged_in_usr")) {
-        redirect("Location: authorized.php");
+    if (Input::has("logged_in_usr")) {
+        Input::redirect("Location: authorized.php");
     }
     if (empty($_REQUEST)) {
         $status = "Login";
     } else {
-        if (inputGet("name") == "guest" && inputGet("password") == "password") {
-            $_SESSION["logged_in_usr"] = inputGet("name");
+        if (Input::get("name") == "guest" && Input::get("password") == "password") {
+            $_SESSION["logged_in_usr"] = Input::get("name");
             $status = "Login";
-            redirect("Location: authorized.php");
+            Input::redirect("Location: authorized.php");
         } else {
             $status = "Login FAIL";
         }
