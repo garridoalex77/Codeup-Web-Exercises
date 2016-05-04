@@ -3,17 +3,10 @@ function pageController() {
     require '../Auth.php';
     session_start();
     Auth::logout();
+    header("Location: login.php");
+    die();
 }
 
 extract(pageController());
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>

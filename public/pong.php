@@ -2,11 +2,7 @@
 require_once '../input.php';
 require 'functions.php';
 function pageController() {
-    if (!Input::has('count')) {
-        $count = 0;
-    } else {
-        $count = Input::get('count');
-    }
+    $count = Input::get('count', 0);
     return ['count' => $count];
 }
 
