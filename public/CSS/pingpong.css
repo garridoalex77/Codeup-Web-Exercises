@@ -42,8 +42,8 @@
     animation: slide 3s infinite;
     animation-delay: 300ms;
 }
-@keyframes slide {
+@/*keyframes slide {
     0%   {left:0px;}
     50%  {left:75%;}
     100% {left:0px;}
-}
+}*/
