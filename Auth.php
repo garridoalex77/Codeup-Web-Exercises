@@ -8,23 +8,18 @@ class Auth
 
      public static function attempt($username, $password) 
      {
+        $userLogin = new Log("users");
         if ($username == "guest" && password_verify($password, self::$password)) {
             $_SESSION["logged_in_usr"] = Input::get("name");
-            $userLogin = new Log("users.txt");
             $userLogin->logInfo("user {$username} logged in"); 
         } else {
-            $userLogin = new Log("users.txt");
             $userLogin->logError("user {$username} failed to login");
             
         }
      }
      public static function check() 
      {
-        if (isset($_SESSION["logged_in_usr"])) {
-            return true;
-        } else {
-            return false;
-        }
+        return isset($_SESSION["logged_in_usr"]);
      }
      public static function user() 
      {
@@ -34,8 +29,6 @@ class Auth
      {
         session_unset();
         session_regenerate_id(true);
-        header("Location: login.php");
-        die();
      }
 
 }
