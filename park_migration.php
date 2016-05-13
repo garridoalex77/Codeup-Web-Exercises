@@ -9,7 +9,7 @@ $createTable = 'CREATE TABLE IF NOT EXISTS national_parks (
         name VARCHAR(50) DEFAULT "NONE",
         location VARCHAR(50) DEFAULT "NONE",
         date_established VARCHAR(50) DEFAULT "NONE",
-        area_in_acres INT,
+        area_in_acres INT DEFAULT 0,
         PRIMARY KEY(id)
         )';
 $dbc->exec($dropQuery);
