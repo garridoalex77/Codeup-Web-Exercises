@@ -25,6 +25,15 @@ class Input
         return self::has($key) ? $_REQUEST[$key] : $default;
     }
 
+    public static function getString()
+    {
+
+    }
+
+    public static function getNumber()
+    {
+
+    }
     public static function redirect($input) 
     {
         return header($input);
