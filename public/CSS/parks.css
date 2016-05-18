@@ -1,9 +1,11 @@
 body {
-    background-color: aliceblue;
+    background-color: ghostwhite;
     font-size: 1.5em;
     color: black;
-    /*text-shadow: 2px 1px #101;*/
     font-family: 'Paytone One', sans-serif;
+}
+footer {
+    font-size: 12px;
 }
 
 button {
@@ -17,16 +19,11 @@ table {
     float: right;
 }
 
-.leftFloat:nth-child(2n+1) {
-    /*float: left;*/
-    clear: both;
+.leftFloat {
+    float: left;
 }
 
 tr:hover {
     background-color: skyblue;
 
-}
-
-input {
-    display: hidden;
 }

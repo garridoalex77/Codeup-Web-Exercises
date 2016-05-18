@@ -14,7 +14,7 @@ function redirect($input) {
 }
 
 function escape($input) {
-    return strip_tags(htmlentities($input));
+    return strip_tag(htmlentities($input));
 }
 
 

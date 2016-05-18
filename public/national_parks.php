@@ -47,66 +47,43 @@ extract(pageController($dbc));
 </head>
 <body>
 <div class="container">
-            
-
-<form method="GET" action="/national_parks.php">
-    <button type="submit" class="btn waves-effect waves-light" name="offset" value=<?= $offset - $pageLimit ?>>Get Previous Parks</button>
-    <?php if ($offset > $total - 4 || $offset == $total -4): ?>
-        <button type="submit" class=" rightFloat btn waves-effect waves-light" name="offset" value=<?= $offset = 0 ?>>Go to Start</button>
-    <?php else: ?>
-        <button type="submit" class=" rightFloat btn waves-effect waves-light" name="offset" value=<?= $offset + $pageLimit ?>>Get More Parks</button>
-    <?php endif ?>
-
-    
-</form>
-<div class="row"> 
-    <div class="col s6">
-        <h1>National Parks</h1>
-    </div>        
-    <div class="col s6">
-        <img src="/IMG/mountains.jpg">
+    <div class="row"> 
+        <div class="col s6">
+            <h1>National Parks</h1>
+        </div>        
+        <div class="col s6">
+            <img src="/IMG/mountains.jpg">
+            <footer>Glacier National Park</footer>
+        </div>
     </div>
-</div>
-    <!-- <table class="bordered">
-        <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Date Established</th>
-            <th>Acres</th>
-            <th>Description</th>
-        </tr> -->
-        <?php foreach ($parks as $park): ?>
-
-
     <div class="row">
-        <div class="card small col s6 leftFloat">
+    <?php foreach ($parks as $park): ?>
+        <div class="card small col s6">
+        <!-- add image for form input and check if image -->
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="/IMG/<?=$park['name']?>.jpg">
             </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4"><?=$park['name']?><i class="material-icons right">More Info</i></span>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4"><?=$park['name']?><i class="material-icons right">X</i></span>
-                <p>Location: <?=$park['location']?> </p>
-                <p>Date Established:  <?=$park['date_established']?> </p>
-                <p>Area in Acres: <?=$park['area_in_acres']?> </p>
-                <p>Description: <?=$park['description']?> </p>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4"><?=Input::escape($park['name'])?><i class="material-icons right">More Info</i></span>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><?=Input::escape($park['name'])?><i class="material-icons right">X</i></span>
+                <p>Location: <?=Input::escape($park['location'])?> </p>
+                <p>Date Established:  <?=Input::escape($park['date_established'])?> </p>
+                <p>Area in Acres: <?=Input::escape($park['area_in_acres'])?> </p>
+                <p>Description: <?=Input::escape($park['description'])?> </p>
             </div>
         </div>
+    <?php endforeach; ?>
     </div>
-
-
-
-     <!--    <tr>
-            <td> <?=$park['name']?> </td>
-            <td> <?=$park['location']?> </td>
-            <td> <?=$park['date_established']?> </td>
-            <td> <?=$park['area_in_acres']?> </td>
-            <td> <?=$park['description']?> </td>
-        </tr> -->
-        <?php endforeach; ?>
-    </table>
+    <form method="GET" action="/national_parks.php">
+    <button type="submit" class="btn waves-effect waves-light" name="offset" value=<?= $offset - $pageLimit ?>>Previous Parks</button>
+    <?php if ($offset > $total - 4 || $offset == $total -4): ?>
+        <button type="submit" class=" rightFloat btn waves-effect waves-light" name="offset" value=<?= $offset = 0 ?>>Go to Start</button>
+    <?php else: ?>
+        <button type="submit" class=" rightFloat btn waves-effect waves-light" name="offset" value=<?= $offset + $pageLimit ?>>More Parks</button>
+    <?php endif ?>
+    </form>
     <h1> Add A New Park</h1>
     <form method="POST">
         <input type="text" required="required" name="name" placeholder="Name">

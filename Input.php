@@ -30,6 +30,11 @@ class Input
         return header($input);
         die();
     }
+
+    public static function escape($input) 
+    {
+        return strip_tags(htmlentities($input));
+    }
     ///////////////////////////////////////////////////////////////////////////
     //                      DO NOT EDIT ANYTHING BELOW!!                     //
     // The Input class should not ever be instantiated, so we prevent the    //
