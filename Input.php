@@ -24,15 +24,22 @@ class Input
     {
         return self::has($key) ? $_REQUEST[$key] : $default;
     }
-
-    public static function getString()
+    public static function getString($key)
     {
-
+        if (!is_string(self::get($key))) {
+            throw new Exception("Error: Must be a string");
+        }
+        $_REQUEST[$key] = (string)self::get($key);
+        return self::get($key);
     }
 
-    public static function getNumber()
+    public static function getNumber($key)
     {
-
+        if (!is_numeric(self::get($key))) {
+            throw new Exception("Error: Must be a number");
+        }
+        $_REQUEST[$key] = (int)self::get($key);
+        return self::get($key);
     }
     public static function redirect($input) 
     {

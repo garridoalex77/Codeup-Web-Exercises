@@ -4,15 +4,11 @@ require_once '../db_connect.php';
 require '../Input.php';
 function pageController($dbc) {
     $data = [];
-    $name = Input::get("name");
-    $location = Input::get("location");
-    $date = Input::get("date_established");
-    $area = Input::get("area_in_acres");
-
-    if (Input::has("offset") && Input::get("offset") < 0) {
+    
+    if (Input::has("offset") && Input::getNumber("offset") < 0) {
         $data['offset'] = 0;
     } elseif (Input::has("offset")) {
-        $data['offset'] = Input::get("offset");
+        $data['offset'] = Input::getNumber("offset");
     } else {
         $data['offset'] = 0;
     }
@@ -24,10 +20,32 @@ function pageController($dbc) {
     $total->execute();
     $data['total'] = count($total->fetchAll(PDO::FETCH_ASSOC));
 
-    if (is_string(Input::get('name')) && is_string(Input::get('location')) && is_string(Input::get('date_established')) && is_numeric(Input::get('area_in_acres'))) {
-        $query = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :date_established, :area_in_acres, :description)";
+    if (!empty($_POST)) {
+        $name = Input::getString("name");
+        $location = Input::getString("location");
+        $date = Input::getString("date_established");
+        $area = Input::getNumber("area_in_acres");
+        $description = Input::getString("description");
+        $query = "INSERT INTO national_parks (
+            name,
+            location,
+            date_established,
+            area_in_acres,
+            description) 
+            VALUES (
+            :name,
+            :location,
+            :date_established,
+            :area_in_acres,
+            :description)";
         $stmt = $dbc->prepare($query);
-        $stmt->execute(array(':name' => Input::get('name'), ':location' => Input::get('location'), ':date_established' => Input::get('date_established'), ':area_in_acres' => Input::get('area_in_acres'), ':description' => Input::get('description')));
+        $stmt->execute(array(
+            ':name' => $name,
+            ':location' => $location,
+            ':date_established' => $date,
+            ':area_in_acres' => $area,
+            ':description' => $description));
+        header("Refresh:0");
     }
     return $data;
 
