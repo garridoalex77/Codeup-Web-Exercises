@@ -26,8 +26,8 @@ class Input
     }
     public static function getString($key)
     {
-        if (!is_string(self::get($key))) {
-            throw new Exception("Error: Must be a string");
+        if (!is_string(self::get($key)) || is_numeric(self::get($key))) {
+            throw new Exception("Error: {$key} must be a string");
         }
         $_REQUEST[$key] = (string)self::get($key);
         return self::get($key);
@@ -36,7 +36,7 @@ class Input
     public static function getNumber($key)
     {
         if (!is_numeric(self::get($key))) {
-            throw new Exception("Error: Must be a number");
+            throw new Exception("Error: {$key} must be a number");
         }
         $_REQUEST[$key] = (int)self::get($key);
         return self::get($key);
