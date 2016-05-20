@@ -1,5 +1,8 @@
 <?php
 
+class InvalidArgument extends Exception {}
+class OutOfRangeException extends Exception {}
+
 class Input
 {
     /**
@@ -33,12 +36,12 @@ class Input
         return self::get($key);
     }
 
-    public static function getNumber($key)
+    public static function getNumber($key, $min = null, $max = null)
     {
         if (!is_numeric(self::get($key))) {
             throw new Exception("Error: {$key} must be a number");
         }
-        $_REQUEST[$key] = (int)self::get($key);
+        $_REQUEST[$key] = (int)self::get($key, $min = null, $max = null);
         return self::get($key);
     }
     public static function redirect($input) 
