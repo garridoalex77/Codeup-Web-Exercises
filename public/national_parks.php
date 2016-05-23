@@ -24,30 +24,69 @@ function pageController($dbc) {
     if (!empty($_POST)) {
         try {
             $name = Input::getString('name');
+        } catch (InvalidArgumentException $e1) {
+            $message['name'] = "Invalid argument".PHP_EOL;
+        } catch (OutofRangeException $e1) {
+            $message['name'] = "Please enter a value for Park Name".PHP_EOL;
+        } catch (DomainException $e1) {
+            $message['name'] = "Please use A-Z characters for Park Name".PHP_EOL;
+        } catch (LengthException $e1) {
+            $message['name'] = "Park Name must be between 5 and 50 characters".PHP_EOL;
         } catch (Exception $e1) {
-            $message[] = $e1->getMessage().PHP_EOL;
+            $message['name'] = $e1->getMessage().PHP_EOL;
         }
         try {
             $location = Input::getString('location');
+       } catch (InvalidArgumentException $e2) {
+            $message['location'] = "Invalid argument".PHP_EOL;
+        } catch (OutofRangeException $e2) {
+            $message['location'] = "Please enter a value for Park Location".PHP_EOL;
+        } catch (DomainException $e2) {
+            $message['location'] = "Please use A-Z characters for Park Location".PHP_EOL;
+        } catch (LengthException $e2) {
+            $message['location'] = "Park Location must be between 5 and 50 characters".PHP_EOL;
         } catch (Exception $e2) {
-            $message[] = $e2->getMessage().PHP_EOL;
+            $message['location'] = $e2->getMessage().PHP_EOL;
         }
         try {
             $date = Input::getString('date_established');
+        } catch (InvalidArgumentException $e3) {
+            $message['date_established'] = "Invalid argument".PHP_EOL;
+        } catch (OutofRangeException $e3) {
+            $message['date_established'] = "Please enter a value for Park Date".PHP_EOL;
+        } catch (DomainException $e3) {
+            $message['date_established'] = "Please use Alphanumeric characters for Park Date".PHP_EOL;
+        } catch (LengthException $e3) {
+            $message['date_established'] = "Park Date must be between 5 and 50 characters".PHP_EOL;
         } catch (Exception $e3) {
-            $message[] = $e3->getMessage().PHP_EOL;
+            $message['date_established'] = $e3->getMessage().PHP_EOL;
         }
         try {
-            $area = Input::getNumber('area_in_acres');
+            $area = Input::getNumber('area_in_acres', 3, 10);
+        } catch (InvalidArgumentException $e4) {
+            $message['area_in_acres'] = "Invalid argument".PHP_EOL;
+        } catch (OutofRangeException $e4) {
+            $message['area_in_acres'] = "Please enter a value for Park Area".PHP_EOL;
+        } catch (DomainException $e4) {
+            $message['area_in_acres'] = "Please use Numeric characters for Park Area".PHP_EOL;
+        } catch (LengthException $e4) {
+            $message['area_in_acres'] = "Park Area must be between 3 and 10 characters".PHP_EOL;
         } catch (Exception $e4) {
-            $message[] = $e4->getMessage().PHP_EOL;
+            $message['area_in_acres'] = $e4->getMessage().PHP_EOL;
         }
         try {
-            $description = Input::getString('description');
+            $description = Input::getString('description', 0, 200);
+        } catch (InvalidArgumentException $e5) {
+            $message['description'] = "Invalid argument".PHP_EOL;
+        } catch (OutofRangeException $e5) {
+            $message['description'] = "Please enter a value for Park Description".PHP_EOL;
+        } catch (DomainException $e5) {
+            $message['description'] = "Please use Alphanumeric characters for Park Description".PHP_EOL;
+        } catch (LengthException $e5) {
+            $message['description'] = "Park Description must be between 0 and 200 characters".PHP_EOL;
         } catch (Exception $e5) {
-            $message[] = $e5->getMessage().PHP_EOL;
+            $message['description'] = $e5->getMessage().PHP_EOL;
         }
-        //code still executes past here if error caught also ints passed as strings in getString
         $query = 'INSERT INTO national_parks (
             name,
             location,
@@ -72,6 +111,13 @@ function pageController($dbc) {
             
         }
     }
+    if (isset($message['location'])) {
+        $data['placeholder'] = $message['location'];
+        
+    } else {
+        $data['placeholder'] = Input::get('location');
+        
+    }
     $data['message'] = $message;
     return $data;
 
@@ -92,11 +138,6 @@ extract(pageController($dbc));
 </head>
 <body>
 <div class="container">
-<?php if (!empty($message)): ?>
-    <?php foreach ($message as $error): ?>
-        <p><?= $error ?> </p>
-    <?php endforeach ?>
-<?php endif ?>
     <div class="row"> 
         <div class="col s6">
             <h1>National Parks</h1>
@@ -135,13 +176,22 @@ extract(pageController($dbc));
     </form>
     <h1> Add A New Park</h1>
     <form method="POST">
-    
-        <input type="text" required="required" name="name" placeholder="Name" value="<?= Input::get('name')?>">
-        <input type="text" required="required" name="location" placeholder="Location" value="<?= Input::get('location')?>">
-        <input type="text" required="required" name="date_established" placeholder="Date Established" value="<?= Input::get('date_established')?>">
-        <input type="number" required="required" name="area_in_acres" placeholder="Area in Acres" value="<?= Input::get('area_in_acres')?>">
-        <input type="text" required="required" name="description" placeholder="Description" value="<?= Input::get('description')?>">
+        <input type="text" required="required" name="name" 
+         <?php if (isset($message['name'])): ?>
+            placeholder="<?= $message['name']; ?>"
+        <?php else: ?>
+            value="<?= Input::get('name'); ?>"
+        <?php endif ?>
+            placeholder="Name">
+
+
+
+        <input type="text" required="required" name="location" value="<?= $placeholder ?>" placeholder="Location">
+        <input type="text" required="required" name="date_established" placeholder="Date Established" value="<?= isset($message['date_established']) ? "" : Input::get('date_established')?>">
+        <input type="text" required="required" name="area_in_acres" placeholder="Area in Acres" value="<?= isset($message['area_in_acres']) ? "" : Input::get('area_in_acres')?>">
+        <input type="text" required="required" name="description" placeholder="Description" value="<?= isset($message['description']) ? "" : Input::get('description')?>">
         <input class="btn waves-effect waves-light" type="submit" value="Add Park">
+
     </form>
 </div>
 

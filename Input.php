@@ -1,8 +1,4 @@
 <?php
-
-class InvalidArgument extends Exception {}
-class OutOfRangeException extends Exception {}
-
 class Input
 {
     /**
@@ -27,23 +23,45 @@ class Input
     {
         return self::has($key) ? $_REQUEST[$key] : $default;
     }
-    public static function getString($key)
+    // $key-not str $min, $max-not num  InvalidAE
+    //missing key OutofRange
+    //wrong type value DomainException
+    //str value shorter than min or longer than max LengthException
+    // num value less than $min or greater than $max RangeException
+    public static function getString($key, $min = 5, $max = 50)
     {
-        if (!is_string(self::get($key)) || is_numeric(self::get($key))) {
-            throw new Exception("Error: {$key} must be a string");
+        $value = self::get($key);
+        $valueLength = strlen($value);
+        if (!is_string($key) || !is_numeric($min) || !is_numeric($max)) {
+            throw new InvalidArgumentException("Error: {$key} must be a string and min/max must be numbers");
+        } elseif (empty($key)) {
+            throw new OutOfRangeException("Error: {$key} is empty");
+        } elseif (!is_string($value) || is_numeric($value)) {
+            throw new DomainException("Error: {$key} must be a string");
+        } elseif ($valueLength < $min || $valueLength > $max) {
+            throw new LengthException("Error: {$key} must be between 5 and 50 characters");
         }
-        $_REQUEST[$key] = (string)self::get($key);
+        $_REQUEST[$key] = (string)$value;
+        return $value;
+    }
+
+    public static function getNumber($key, $min = 0, $max = 50)
+    {
+        $value = self::get($key);
+        $valueLength = strlen((string)$value);
+        if (!is_string($key) || !is_numeric($min) || !is_numeric($max)) {
+            throw new InvalidArgumentException("Error: {$key} must be a string and min/max must be numbers");
+        } elseif (empty($key)) {
+            throw new OutOfRangeException("Error: {$key} is empty");
+        } elseif (!is_numeric($value)) {
+            throw new DomainException("Error: {$key} must be a number");
+        } elseif ($valueLength < $min || $valueLength > $max) {
+            throw new LengthException("Error: {$key} must be between 5 and 50 characters");
+        }
+        $_REQUEST[$key] = (int)$value;
         return self::get($key);
     }
 
-    public static function getNumber($key, $min = null, $max = null)
-    {
-        if (!is_numeric(self::get($key))) {
-            throw new Exception("Error: {$key} must be a number");
-        }
-        $_REQUEST[$key] = (int)self::get($key, $min = null, $max = null);
-        return self::get($key);
-    }
     public static function redirect($input) 
     {
         return header($input);
