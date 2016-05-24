@@ -69,13 +69,15 @@ abstract class Model
     /** Store the object in the database */
     public function save()
     {
-        if (!empty($this->attributes['id'])) {
-            self::update();
-        } elseif (!empty($this->attributes)) {
-            self::insert();
+        self::dbConnect();
+        if (!empty($this->attributes)) {
+            if (isset($this->attributes['id'])) {
+                $this->update();
+            } else {
+                $this->insert();
+            }
         }
         // @TODO: Ensure there are values in the attributes array before attempting to save
-        //check to see if insert or save
         // @TODO: Call the proper database method: if the `id` is set this is an update, else it is a insert
     }
 

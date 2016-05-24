@@ -6,9 +6,9 @@ $dropQuery = 'DROP TABLE IF EXISTS users';
 
 $createTable = 'CREATE TABLE IF NOT EXISTS users (
     id INT unsigned NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    password VARCHAR(250) NOT NULL,
     PRIMARY KEY (id)
     )';
 $dbc->exec($dropQuery);
