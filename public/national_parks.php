@@ -5,7 +5,7 @@ require '../Input.php';
 function pageController($dbc) {
     $data = [];
     $message = [];
-    
+
     if (Input::has('offset') && Input::get('offset') < 0) {
         $data['offset'] = 0;
     } elseif (Input::has('offset')) {
@@ -92,7 +92,7 @@ function pageController($dbc) {
             location,
             date_established,
             area_in_acres,
-            description) 
+            description)
             VALUES (
             :name,
             :location,
@@ -108,15 +108,15 @@ function pageController($dbc) {
                 ':area_in_acres' => $area,
                 ':description' => $description));
             header('Refresh:0');
-            
+
         }
     }
     if (isset($message['location'])) {
         $data['placeholder'] = $message['location'];
-        
+
     } else {
         $data['placeholder'] = Input::get('location');
-        
+
     }
     $data['message'] = $message;
     return $data;
@@ -138,10 +138,10 @@ extract(pageController($dbc));
 </head>
 <body>
 <div class="container">
-    <div class="row"> 
+    <div class="row">
         <div class="col s6">
             <h1>National Parks</h1>
-        </div>        
+        </div>
         <div class="col s6">
             <img src="/IMG/mountains.jpg">
             <footer>Glacier National Park</footer>
@@ -176,7 +176,7 @@ extract(pageController($dbc));
     </form>
     <h1> Add A New Park</h1>
     <form method="POST">
-        <input type="text" required="required" name="name" 
+        <input type="text" required="required" name="name"
          <?php if (isset($message['name'])): ?>
             placeholder="<?= $message['name']; ?>"
         <?php else: ?>
